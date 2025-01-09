@@ -59,14 +59,14 @@ function TaskListScreen({ navigation }) {
   };
 
   const filteredTasks = tasks.filter(task => {
-    if (filter === 'completed') return task.done;
-    if (filter === 'incomplete') return !task.done;
+    if (filter === 'done') return task.done;
+    if (filter === 'nodone') return !task.done;
     return true; // 'all'
   });
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Manage Your Tasks</Text>
+      <Text style={styles.header}>Go To Your Dreams</Text>
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.input}
@@ -84,23 +84,23 @@ function TaskListScreen({ navigation }) {
           onPress={() => setFilter('all')}
         >
           <Text style={[styles.filterButtonText, filter === 'all' && styles.activeFilterButtonText]}>
-            All Tasks
+            All
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={[styles.filterButton, filter === 'completed' && styles.activeFilterButton]}
-          onPress={() => setFilter('completed')}
+          style={[styles.filterButton, filter === 'done' && styles.activeFilterButton]}
+          onPress={() => setFilter('done')}
         >
-          <Text style={[styles.filterButtonText, filter === 'completed' && styles.activeFilterButtonText]}>
-            Completed
+          <Text style={[styles.filterButtonText, filter === 'done' && styles.activeFilterButtonText]}>
+            Done
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={[styles.filterButton, filter === 'incomplete' && styles.activeFilterButton]}
-          onPress={() => setFilter('incomplete')}
+          style={[styles.filterButton, filter === 'nodone' && styles.activeFilterButton]}
+          onPress={() => setFilter('nodone')}
         >
-          <Text style={[styles.filterButtonText, filter === 'incomplete' && styles.activeFilterButtonText]}>
-            Incomplete
+          <Text style={[styles.filterButtonText, filter === 'nodone' && styles.activeFilterButtonText]}>
+            No Done
           </Text>
         </TouchableOpacity>
       </View>
@@ -114,7 +114,7 @@ function TaskListScreen({ navigation }) {
             />
             <TouchableOpacity
               style={styles.taskContainer}
-              onPress={() => navigation.navigate('EditTask', {
+              onPress={() => navigation.navigate('Edit Task', {
                 taskId: item.id,
                 currentText: item.text,
                 currentDescription: item.description,
@@ -175,7 +175,7 @@ const AppNavigator = () => {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Task List">
         <Stack.Screen name="Task List" component={TaskListScreen} />
-        <Stack.Screen name="EditTask" component={EditTaskScreen} />
+        <Stack.Screen name="Edit Task" component={EditTaskScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
